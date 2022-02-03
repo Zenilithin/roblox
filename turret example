@@ -1,0 +1,68 @@
+local mainPart = script.Parent.MainPart
+
+wait(5)
+
+while wait(script.Parent.FireRate.Value) do
+	
+	for i, item in pairs(workspace:GetChildren()) do
+		if item:FindFirstChild("Humanoid") then
+			local chr = item
+
+			if chr.Humanoid.Health <= 0 then
+			else
+				if (mainPart.Position - chr.Head.Position).Magnitude <= script.Parent.Distance.Value then
+					local gunRay = Ray.new(mainPart.Position, (chr.Head.Position - mainPart.Position).Unit * 500)
+					local h, p = game.Workspace:FindPartOnRayWithIgnoreList(gunRay, {mainPart,script.Parent.ignore,script.Parent.ignore2,workspace.Baseplate})
+					if h.Parent:FindFirstChild("Humanoid") then
+						mainPart.CFrame = CFrame.new(mainPart.Position, h.Parent.Head.Position)
+						h.Parent.Humanoid:TakeDamage(script.Parent.Damage.Value)
+						script.Parent.blast:Play()
+
+						--EFFECTS
+						local clone1 = game.ServerStorage.turretEffect:Clone()
+						local clone2 = game.ServerStorage.turretEffect:Clone()
+
+						clone1.Parent = workspace
+						clone2.Parent = workspace
+
+
+						clone1.CFrame = script.Parent.pew1.CFrame
+						clone2.CFrame = script.Parent.pew2.CFrame
+						clone1.Transparency = 0.6
+						clone2.Transparency = 0.6
+
+						wait(0.05)
+						clone1.Size = clone1.Size + Vector3.new(0.5,0.5,0.5)
+						clone2.Size  = clone2.Size +  Vector3.new(0.5,0.5,0.5)
+
+						clone1.Transparency += 0.1
+						clone2.Transparency += 0.1
+						wait(0.05)
+						clone1.Size = clone1.Size + Vector3.new(0.5,0.5,0.5)
+						clone2.Size  = clone2.Size +  Vector3.new(0.5,0.5,0.5)
+
+						clone1.Transparency += 0.1
+						clone2.Transparency += 0.1
+						wait(0.05)
+						clone1.Size = clone1.Size + Vector3.new(0.5,0.5,0.5)
+						clone2.Size  = clone2.Size +  Vector3.new(0.5,0.5,0.5)
+
+						clone1.Transparency += 0.1
+						clone2.Transparency += 0.1
+						wait(0.05)
+						clone1.Size = clone1.Size + Vector3.new(0.5,0.5,0.5)
+						clone2.Size  = clone2.Size +  Vector3.new(0.5,0.5,0.5)
+
+						clone1.Transparency += 0.1
+						clone2.Transparency += 0.1
+						wait(0.05)
+						clone1:Destroy()
+						clone2:Destroy()
+					end
+
+				end
+			end
+		end
+	end
+	
+end
